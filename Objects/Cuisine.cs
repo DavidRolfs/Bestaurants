@@ -11,7 +11,7 @@ namespace Bestaurants
 
     public Cuisine(string name, int id = 0)
     {
-      id = _id;
+      _id = id;
       _name = name;
     }
 
@@ -29,7 +29,7 @@ namespace Bestaurants
         return (idEquality && nameEquality);
       }
     }
-// GETTERS
+// GETTERS------
     public int GetId()
     {
       return _id;
@@ -40,13 +40,15 @@ namespace Bestaurants
       return _name;
     }
 
-// SETTERS
+// SETTERS------
     public void SetName(string name)
     {
       _name = name;
     }
 
-// CLASS METHODS
+// CLASS METHODS------
+
+//GETAll METHOD
     public static List<Cuisine> GetAll()
     {
       List<Cuisine> allCuisines = new List<Cuisine>{};
@@ -59,6 +61,7 @@ namespace Bestaurants
       while(rdr.Read())
       {
         int cuisineId = rdr.GetInt32(0);
+        Console.WriteLine(cuisineId);
         string cuisineName = rdr.GetString(1);
         Cuisine newCuisine = new Cuisine(cuisineName, cuisineId);
 
@@ -75,5 +78,43 @@ namespace Bestaurants
 
       return allCuisines;
     }
+
+//SAVE METHOD
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO cuisines (name) OUTPUT INSERTED.id VALUES(@CuisineName);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@CuisineName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public static void DeleteAll()
+       {
+         SqlConnection conn = DB.Connection();
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
+
+         cmd.ExecuteNonQuery();
+         conn.Close();
+       }
+
   }
 }
