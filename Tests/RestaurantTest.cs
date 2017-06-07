@@ -65,7 +65,7 @@ namespace Bestaurants
 
     public void Dispose()
     {
-      Restaurant.DeleteAll();
+      Cuisine.DeleteAll();
     }
 
   }

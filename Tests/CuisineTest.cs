@@ -76,6 +76,21 @@ namespace Bestaurants
       List<Restaurant> resultRestaurantList = testCuisine.GetRestaurant();
     }
 
+    [Fact]
+    public void Test_Update_UpdatesCategoryInDatabase()
+    {
+      string name = "French";
+      Cuisine testCuisine = new Cuisine(name);
+      testCuisine.Save();
+      string newName = "Frenchies";
+
+      testCuisine.Update(newName);
+
+      string result = testCuisine.GetName();
+
+      Assert.Equal(newName, result);
+    }
+
 
 
 
@@ -83,6 +98,7 @@ namespace Bestaurants
     public void Dispose()
     {
       Cuisine.DeleteAll();
+      Restaurant.DeleteAll();
     }
 
   }
