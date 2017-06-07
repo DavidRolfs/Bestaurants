@@ -49,6 +49,20 @@ namespace Bestaurants
       Assert.Equal(testList, result);
     }
 
+    [Fact]
+    public void Test_Find_FindsRestaurantInDatabase()
+    {
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Frenchies", 1);
+      testRestaurant.Save();
+
+      //Act
+      Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
+
+      //Assert
+      Assert.Equal(testRestaurant, foundRestaurant);
+    }
+
     public void Dispose()
     {
       Restaurant.DeleteAll();

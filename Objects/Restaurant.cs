@@ -129,6 +129,41 @@ namespace Bestaurants
       }
     }
 
+    public static Restaurant Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants WHERE id = @RestaurantId;", conn);
+      SqlParameter RestaurantIdParameter = new SqlParameter();
+      RestaurantIdParameter.ParameterName = "@RestaurantId";
+      RestaurantIdParameter.Value = id.ToString();
+      cmd.Parameters.Add(RestaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundRestaurantId = 0;
+      string foundRestaurantName = null;
+      int foundRestaurantCuisineId = 0;
+
+      while(rdr.Read())
+      {
+        foundRestaurantId = rdr.GetInt32(0);
+        foundRestaurantName = rdr.GetString(1);
+        foundRestaurantCuisineId = rdr.GetInt32(2);
+      }
+      Restaurant foundRestaurant = new Restaurant(foundRestaurantName, foundRestaurantCuisineId, foundRestaurantId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundRestaurant;
+    }
+
 
 
   //DELETE METHOD
