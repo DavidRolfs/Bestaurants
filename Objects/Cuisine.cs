@@ -61,7 +61,6 @@ namespace Bestaurants
       while(rdr.Read())
       {
         int cuisineId = rdr.GetInt32(0);
-        Console.WriteLine(cuisineId);
         string cuisineName = rdr.GetString(1);
         Cuisine newCuisine = new Cuisine(cuisineName, cuisineId);
 

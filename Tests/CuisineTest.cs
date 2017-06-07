@@ -38,14 +38,12 @@ namespace Bestaurants
     [Fact]
     public void Test_Save_SavesToDatabase()
     {
-      //Arrange, Act
+      //Arrange
       Cuisine testCuisine = new Cuisine("French");
       testCuisine.Save();
-      Console.WriteLine("Id: {0} Name: {1}", testCuisine.GetId(), testCuisine.GetName());
       //Act
       List<Cuisine> result = Cuisine.GetAll();
       List<Cuisine> testList = new List<Cuisine>{testCuisine};
-      Console.WriteLine("Id: {0} Name: {1}", result[0].GetId(), result[0].GetName());
 
       //Assert
       Assert.Equal(testList, result);
