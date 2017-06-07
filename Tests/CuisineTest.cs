@@ -91,6 +91,36 @@ namespace Bestaurants
       Assert.Equal(newName, result);
     }
 
+    [Fact]
+    public void Test_Delete_DeletesCategoryFromDatabase()
+    {
+      //Arrange
+      string cuisineName1 = "Fake";
+      Cuisine testCuisine1 = new Cuisine(cuisineName1);
+      testCuisine1.Save();
+
+      string cuisineName2 = "French";
+      Cuisine testCuisine2 = new Cuisine(cuisineName2);
+      testCuisine2.Save();
+
+      Restaurant testRestaurant1 = new Restaurant("Fakies", testCuisine1.GetId());
+      testRestaurant1.Save();
+      Restaurant testRestaurant2 = new Restaurant("Frenchies", testCuisine2.GetId());
+      testRestaurant2.Save();
+
+      //Act
+      testCuisine1.Delete();
+
+      List<Cuisine> resultCuisineList = Cuisine.GetAll();
+      List<Cuisine> testCuisineList = new List<Cuisine>{testCuisine2};
+
+      List<Restaurant> resultRestaurantList = Restaurant.GetAll();
+      List<Restaurant> testRestaurantList = new List<Restaurant>{testRestaurant2};
+      //Assert
+      Assert.Equal(testCuisineList, resultCuisineList);
+      Assert.Equal(testRestaurantList, resultRestaurantList);
+    }
+
 
 
 
@@ -98,7 +128,7 @@ namespace Bestaurants
     public void Dispose()
     {
       Cuisine.DeleteAll();
-      Restaurant.DeleteAll();
+    //  Restaurant.DeleteAll();
     }
 
   }

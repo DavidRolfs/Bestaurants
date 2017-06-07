@@ -208,12 +208,31 @@ namespace Bestaurants
       }
     }
 
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines WHERE id = @CuisineId; DELETE FROM restaurants WHERE cuisine_id = @CuisineId;", conn);
+
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(cuisineIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
 
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines; DELETE FROM restaurants", conn);
 
       cmd.ExecuteNonQuery();
       conn.Close();

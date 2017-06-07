@@ -40,11 +40,11 @@ namespace Bestaurants
     {
       //Arrange
       Restaurant testRestaurant = new Restaurant("Frenchies", 1);
-
       //Act
       testRestaurant.Save();
       List<Restaurant> result = Restaurant.GetAll();
       List<Restaurant> testList = new List<Restaurant>{testRestaurant};
+
       //Assert
       Assert.Equal(testList, result);
     }
@@ -65,8 +65,9 @@ namespace Bestaurants
 
     public void Dispose()
     {
-      //RestaurantTest was being disposed BEFORE CuisineTest was finished using restaurants table. 
-      Cuisine.DeleteAll();
+      //RestaurantTest was being disposed BEFORE CuisineTest was finished using restaurants table.
+      Restaurant.DeleteAll();
+      //Cuisine.DeleteAll();
     }
 
   }
