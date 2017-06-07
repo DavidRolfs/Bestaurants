@@ -60,6 +60,25 @@ namespace Bestaurants
       Assert.Equal(testCuisine, foundCuisine);
     }
 
+    [Fact]
+    public void Test_GetRestaurants_RetrievesAllRestaurantsWithinCuisine()
+    {
+      Cuisine testCuisine = new Cuisine("French");
+      testCuisine.Save();
+
+      Restaurant firstRestaurant = new Restaurant("Frenchies", testCuisine.GetId());
+      Restaurant secondRestaurant = new Restaurant("Frenchies", testCuisine.GetId());
+
+      firstRestaurant.Save();
+      secondRestaurant.Save();
+
+      List<Restaurant> testRestaurantList = new List<Restaurant>{firstRestaurant, secondRestaurant};
+      List<Restaurant> resultRestaurantList = testCuisine.GetRestaurant();
+    }
+
+
+
+
 
     public void Dispose()
     {
