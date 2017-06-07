@@ -107,14 +107,47 @@ namespace Bestaurants
     }
 
     public static void DeleteAll()
-       {
-         SqlConnection conn = DB.Connection();
-         conn.Open();
-         SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
+     {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
 
-         cmd.ExecuteNonQuery();
-         conn.Close();
-       }
+      cmd.ExecuteNonQuery();
+      conn.Close();
+     }
 
+    public static Cuisine Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines WHERE id = @CuisineId;", conn);
+
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = id.ToString();
+      cmd.Parameters.Add(cuisineIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundCuisineId = 0;
+      string foundCuisineName = null;
+
+      while(rdr.Read())
+      {
+        foundCuisineId = rdr.GetInt32(0);
+        foundCuisineName = rdr.GetString(1);
+      }
+      Cuisine foundCuisine = new Cuisine(foundCuisineName, foundCuisineId);
+
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+      return foundCuisine;
+    }
   }
 }

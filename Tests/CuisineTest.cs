@@ -51,6 +51,17 @@ namespace Bestaurants
       Assert.Equal(testList, result);
     }
 
+    [Fact]
+    public void Test_Find_FindsCuisineInDatabase()
+    {
+      Cuisine testCuisine = new Cuisine("French");
+      testCuisine.Save();
+
+      Cuisine foundCuisine = Cuisine.Find(testCuisine.GetId());
+
+      Assert.Equal(testCuisine, foundCuisine);
+    }
+
 
     public void Dispose()
     {
