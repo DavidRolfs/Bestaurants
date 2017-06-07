@@ -65,6 +65,7 @@ namespace Bestaurants
 
     public void Dispose()
     {
+      //RestaurantTest was being disposed BEFORE CuisineTest was finished using restaurants table. 
       Cuisine.DeleteAll();
     }
 
