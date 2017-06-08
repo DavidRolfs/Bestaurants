@@ -1,0 +1,13 @@
+@if (@Model["restaurants"].Count == 0)
+{
+  <p>No restaurants have been added yet!</p>
+}
+else
+{
+  <ol>
+    @foreach (var restaurant in @Model["restaurants"])
+    {
+      <li>@restaurant.GetName()</li>
+    }
+  </ol>
+}
