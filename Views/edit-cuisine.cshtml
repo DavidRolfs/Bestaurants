@@ -1,0 +1,15 @@
+
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<form action="/cuisine/edit/@Model.GetId()" method="post">
+
+
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="cuisine-id" type="hidden" value="@Model.GetId()">
+
+  <label for="edit-cuisine">Change name</label>
+  <input name="edit-cuisine" type="text">
+  <button type="submit">Update</button>
+</form>

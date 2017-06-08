@@ -43,18 +43,38 @@ namespace Bestaurants
         newRestaurant.Save();
         return View["index.cshtml"];
       };
-      Get["/cuisines/{id}"] = parameters => {
+
+//    cuisint/{id} -> cuisine-restaurants
+      Get["/cuisines/{id}"] = parameter => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
+        Cuisine SelectedCuisine = Cuisine.Find(parameter.id);
         List<Restaurant> CuisineRestaurants = SelectedCuisine.GetRestaurant();
         model.Add("Cuisine", SelectedCuisine);
         model.Add("restaurants", CuisineRestaurants);
         return View["cuisine-restaurants.cshtml", model];
       };
+
+//    cuisine/delete -> cuisine-delete
       Post["/cuisines/delete"] = _ => {
         Cuisine.DeleteAll();
         return View["cuisine-delete.cshtml"];
       };
+
+//    cusine/edit/{id} -> edit-cuisine
+      Get["cuisine/edit/{id}"] = parameter => {
+        Cuisine SelectedCuisine = Cuisine.Find(parameter.id);
+        return View["edit-cuisine.cshtml", SelectedCuisine];
+      };
+
+//    cusine/edit/{id} -> index
+      Patch["cuisine/edit/{id}"] = parameter => {
+        Cuisine SelectedCuisine = Cuisine.Find(parameter.id);
+        SelectedCuisine.Update(Request.Form["edit-cuisine"]);
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["all-cuisine.cshtml", allCuisines];
+      };
+
+
     }
   }
 }
