@@ -33,7 +33,7 @@ namespace Bestaurants
       }
     }
 
-//  GETTERS
+//  GETTERS------
     public int GetId()
     {
       return _id;
@@ -49,7 +49,7 @@ namespace Bestaurants
       return _cuisineId;
     }
 
-//  SETTERS
+//  SETTERS------
     public void SetRestaurantName(string newName)
     {
       _name = newName;
@@ -59,9 +59,9 @@ namespace Bestaurants
       _cuisineId = newId;
     }
 
-// CLASS METHODS
+// CLASS METHODS------
 
-  //GETALL METHOD
+//GETALL METHOD
     public static List<Restaurant> GetAll()
     {
       List<Restaurant> allRestaurant = new List<Restaurant>{};
@@ -80,6 +80,9 @@ namespace Bestaurants
 
         Restaurant newRestaurant = new Restaurant(restaurantName, restaurantCuisineId, restaurantId);
         allRestaurant.Add(newRestaurant);
+
+        Console.WriteLine("New Restaurant: {0}", newRestaurant.GetId());
+
       }
 
       if (rdr != null)
@@ -93,7 +96,7 @@ namespace Bestaurants
       return allRestaurant;
     }
 
-  //SAVE METHOD
+//SAVE METHOD
     public void Save()
     {
       SqlConnection conn = DB.Connection();
@@ -128,7 +131,7 @@ namespace Bestaurants
         conn.Close();
       }
     }
-
+//FINE METHOD
     public static Restaurant Find(int id)
     {
       SqlConnection conn = DB.Connection();

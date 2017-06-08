@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace Bestaurants
 {
+  [Collection("Bestaurants")]
   public class RestaurantsTest : IDisposable
   {
     public RestaurantsTest()
@@ -67,7 +68,6 @@ namespace Bestaurants
     {
       //RestaurantTest was being disposed BEFORE CuisineTest was finished using restaurants table.
       Restaurant.DeleteAll();
-      //Cuisine.DeleteAll();
     }
 
   }

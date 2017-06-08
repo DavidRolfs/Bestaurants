@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace Bestaurants
 {
+  [Collection("Bestaurants")]
   public class CuisineTest : IDisposable
   {
     public CuisineTest()
@@ -122,13 +123,9 @@ namespace Bestaurants
     }
 
 
-
-
-
     public void Dispose()
     {
       Cuisine.DeleteAll();
-    //  Restaurant.DeleteAll();
     }
 
   }

@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/Content/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <title>Bestaurants</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1><span id="heading-color1">Bestaurants</span><br><small>By David Rolfs and Jordan Loop</small></h1>
+      </div>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+          </button><a class="navbar-brand" href="/">Home</a>
+        </button><a class="navbar-brand" href="/new-cuisines">Add New Content</a>
+          </div>
+        </div>
+      </nav>
+      <div id="dynamic-content">
+        @RenderBody()
+      </div>
+    </div>
+  </body>
+</html>

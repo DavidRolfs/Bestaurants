@@ -105,7 +105,7 @@ namespace Bestaurants
       }
     }
 
-
+//FINE METHOD
     public static Cuisine Find(int id)
     {
       SqlConnection conn = DB.Connection();
@@ -139,7 +139,7 @@ namespace Bestaurants
       }
       return foundCuisine;
     }
-
+//GETRESTAURANT METHOD
     public List<Restaurant> GetRestaurant()
     {
       SqlConnection conn = DB.Connection();
@@ -174,7 +174,7 @@ namespace Bestaurants
       }
       return restaurants;
     }
-
+//UPDATE METHOD
     public void Update(string newName)
     {
       SqlConnection conn = DB.Connection();
@@ -207,7 +207,7 @@ namespace Bestaurants
         conn.Close();
       }
     }
-
+//DELETE METHOD
     public void Delete()
     {
       SqlConnection conn = DB.Connection();
@@ -227,7 +227,7 @@ namespace Bestaurants
         conn.Close();
       }
     }
-
+//DELETEALL METHOD
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
