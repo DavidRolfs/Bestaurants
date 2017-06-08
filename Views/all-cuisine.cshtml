@@ -10,6 +10,10 @@
     @foreach (var cuisines in Model)
     {
       <li><a href="/cuisines/@cuisines.GetId()">@cuisines.GetName()</a></li>
+
+      <form action="/cuisines/delete" method="post">
+      <button type="submit">Clear all Cuisines</button>
+      </form>
     }
   }
 </ul>

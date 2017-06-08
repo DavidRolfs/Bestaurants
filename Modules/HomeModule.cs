@@ -18,6 +18,11 @@ namespace Bestaurants
         return View["add-cuisine.cshtml"];
       };
 
+      Get["/cuisines/all"] = _ => {
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["all-cuisine.cshtml", allCuisines];
+      };
+
 //  cusines/add -> all-cuisine
       Post["/cuisines/all"] = _ => {
         Cuisine newCuisine = new Cuisine(Request.Form["cuisine-name"]);
@@ -45,6 +50,10 @@ namespace Bestaurants
         model.Add("Cuisine", SelectedCuisine);
         model.Add("restaurants", CuisineRestaurants);
         return View["cuisine-restaurants.cshtml", model];
+      };
+      Post["/cuisines/delete"] = _ => {
+        Cuisine.DeleteAll();
+        return View["cuisine-delete.cshtml"];
       };
     }
   }
