@@ -9,8 +9,17 @@ namespace Bestaurants
     public HomeModule()
     {
       Get["/"] = _ => {
-
         return View["index.cshtml"];
+      };
+
+      Get["/cuisines/add"] = _ => {
+        return View["add-cuisine.cshtml"];
+      };
+      Post["/cuisines/all"] = _ => {
+        Cuisine newCuisine = new Cuisine(Request.Form["cuisine-name"]);
+        newCuisine.Save();
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["all-cuisine.cshtml", allCuisines];
       };
     }
   }
