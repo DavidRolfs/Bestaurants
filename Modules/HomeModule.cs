@@ -57,7 +57,7 @@ namespace Bestaurants
 //    cuisine/delete -> cuisine-delete
       Post["/cuisines/delete"] = _ => {
         Cuisine.DeleteAll();
-        return View["cuisine-delete.cshtml"];
+        return View["deleteAll-confirm.cshtml"];
       };
 
 //    cusine/edit/{id} -> edit-cuisine
@@ -74,6 +74,15 @@ namespace Bestaurants
         return View["all-cuisine.cshtml", allCuisines];
       };
 
+      Get["cuisine/delete/{id}"] = parameters => {
+        Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
+        return View["cuisine-delete.cshtml", SelectedCuisine];
+      };
+      Delete["cuisine/delete/{id}"] = parameters => {
+        Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
+        SelectedCuisine.Delete();
+        return View["index.cshtml"];
+      };
 
     }
   }
