@@ -7,10 +7,10 @@
   <label for="restaurant-name">New Restaurant</label>
   <input name="restaurant-name" type="text">
   <select name = "cuisine-id">
-    @foreach (var cuisines in Model)
-    {
-      <option value="@cuisines.GetId()">@cuisines.GetName()</option>
-    }
-<!-- BUTTON CAN'T BE FOUND -->
-  <button type="submit">Add restaurant</button>
+  @foreach (var cuisines in Model)
+  {
+    <option value="@cuisines.GetId()">@cuisines.GetName()</option>
+  }
+  </select>
+  <br><br><button type="submit">Add restaurant</button>
 </form>
